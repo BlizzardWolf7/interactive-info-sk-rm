@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBM MAB - Produkt Info</title>
+	<link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/produkter.css">
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <div class="header">
+        <h1>MBM MAB - Produkt Info</h1>
+    </div>
+    
+    <div class="container">
+        <!-- Categories and Products List -->
+        <div id="product-container">
+            <!-- Products will be generated here by JavaScript -->
+        </div>
+
+        <!-- Modal Overlay for Product Details -->
+		<div id="modal-overlay" class="hidden" onclick="hideDetails()"></div>
+
+		<!-- Product Details Modal -->
+		<div id="product-details" class="hidden">
+			<div class="product-content">
+				<div class="product-images">
+					<img id="main-image" src="" alt="Hovedbillede" onclick="expandImage(this)">
+					<div id="thumbnail-container-wrapper">
+						<div id="thumbnail-container"></div>
+					</div>
+				</div>
+				<div class="product-info">
+					<h2 id="details-title">Produkt Detaljer</h2>
+					<p id="details-description">Detaljer om produktet vises her.</p>
+					<div id="specifications-container" class="hidden"></div>
+					
+				</div>
+			</div>
+				<div id="variant-container" class="variant-dropdown-container"></div>
+				<button class="close-button" onclick="hideDetails()">&times;</button>
+		</div>
+		<div id="image-modal" class="image-modal">
+		  <span class="close-button" onclick="closeImageModal()">&times;</span>
+		  <span class="arrow left-arrow" onclick="prevImage()">&#10094;</span>
+		  <img class="image-modal-content" id="expanded-image" />
+		  <span class="arrow right-arrow" onclick="nextImage()">&#10095;</span>
+		</div>
+    </div>
+
+	<script src="js/products.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

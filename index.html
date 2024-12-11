@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBM MAB - Produkt Info</title>
+	<link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Velkommen til</h1>
+		<img class="menu-logo" src="img/mbm-logo.png" alt="Logo">
+		<h1 id="welcome-message"></h1>
+        <p>Vælg hvad du vil se:</p>
+        <div class="menu">
+            <a href="virksomheden.html" class="menu-item">
+                <img src="img/menu/about.png" alt="Virksomheden">
+                <span>Om Virksomheden</span>
+            </a>
+			<a href="video.html" class="menu-item">
+                <img src="img/menu/video-icon.png" alt="Video">
+                <span>Præsentationsvideo</span>
+            </a>
+            <a href="produkter.html" class="menu-item">
+                <img src="img/menu/products-icon.png" alt="Produkter">
+                <span>Produkter</span>
+            </a>
+			<a href="calender.html" class="menu-item">
+                <img src="img/menu/meetings.png" alt="Møder">
+                <span>Møder</span>
+            </a>
+        </div>
+    </div>
+	
+	<script src="js/script.js"></script>
+<script>
+	// Select all menu items
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+        // Add the "clicked" class for animation
+        item.classList.add('clicked');
+
+        // Remove the "clicked" class after animation ends
+        setTimeout(() => {
+            item.classList.remove('clicked');
+        }, 300); // Duration
+    });
+});
+
+</script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script> -->
+<!-- <script>
+    async function fetchNextEvent() {
+        const icsURL = "https://outlook.office365.com/owa/calendar/b10a5fa4688f4294a3a06f3c9ec048af@mbm-mab.dk/43f188a11aeb4424ba0ca2a2528e8a4d3549249293086366724/calendar.ics";
+        const welcomeMessageDiv = document.getElementById("welcome-message");
+
+        try {
+            // Fetch the ICS file
+            const response = await fetch(icsURL);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const icsData = await response.text();
+
+            // Parse the ICS file
+            const jCalData = ICAL.parse(icsData);
+            const comp = new ICAL.Component(jCalData);
+            const events = comp.getAllSubcomponents('vevent');
+
+            // Get the current time
+            const now = new Date();
+
+            // Find the next event
+            let nextEvent = null;
+            events.forEach(event => {
+                const startDate = event.getFirstPropertyValue('dtstart').toJSDate();
+
+                if (startDate > now && (!nextEvent || startDate < nextEvent.start)) {
+                    nextEvent = {
+                        summary: event.getFirstPropertyValue('summary'),
+                        start: startDate,
+                    };
+                }
+            });
+
+            // Display the next event as a welcome message
+            if (nextEvent) {
+                welcomeMessageDiv.textContent = `${nextEvent.summary}`;
+            } else {
+                welcomeMessageDiv.textContent = "Ingen kommende møder.";
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing the ICS file:", error);
+            welcomeMessageDiv.textContent = "Fejl ved indlæsning af kalender.";
+        }
+    }
+
+    // Fetch the next event on page load
+    fetchNextEvent();
+</script> -->
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* Farve-definitioner */
+
+/* Primære farver */
+:root {
+    --primary-color: #004165; /* Primær blå */
+    --primary-light: #3399FF; /* Lys blå */
+    --primary-dark: #0056b3; /* Mørk blå */
+
+    /* Sekundære farver */
+    --secondary-color: #28a745; /* Grøn */
+    --secondary-light: #5bc0de; /* Lys grøn */
+    --secondary-dark: #1e7e34; /* Mørk grøn */
+
+    /* Neutrale farver */
+    --neutral-light: #f4f4f4; /* Lys grå */
+    --neutral-dark: #333; /* Mørk grå */
+    --neutral-white: #ffffff; /* Hvid */
+    --neutral-black: #000000; /* Sort */
+
+    /* Tekstfarver */
+    --text-primary: #333; /* Primær tekst farve */
+    --text-secondary: #666; /* Sekundær tekst farve */
+
+    /* Baggrundsfarver */
+    --background-light: #ffffff; /* Hvid baggrund */
+    --background-dark: #f4f4f4; /* Lys grå baggrund */
+
+    /* Knapfarver */
+    --button-background: #007BFF; /* Knappens baggrund farve */
+    --button-text: #ffffff; /* Knappens tekst farve */
+    --button-hover-background: #0056b3; /* Knap hover baggrund farve */
+}

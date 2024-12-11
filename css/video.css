@@ -1,0 +1,119 @@
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-container {
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Ensures no overflow */
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the screen, maintaining aspect ratio */
+    display: block;
+    background: #000;
+}
+
+.controls-bar {
+    width: 100%;
+    background: white; /* White bar background */
+    position: fixed; /* Stays at the bottom of the screen */
+    bottom: 0;
+    left: 0;
+    padding: 40px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Shadow for better contrast */
+}
+
+.seek-bar, .volume-bar {
+    -webkit-appearance: none; /* Remove default styling in Webkit browsers */
+    appearance: none;
+    height: 40px; /* Increase height for thickness */
+    margin: 0 10px;
+    background-color: var(--neutral-white); /* Bar background color */
+    cursor: pointer;
+    z-index: 1;
+    border: 2px solid black; /* Add a solid border for visibility */
+    border-radius: 0; /* Remove rounded edges for hard corners */
+}
+
+/* Specific styles for the seek bar */
+.seek-bar {
+    flex-grow: 2;
+    width: 50vw;
+    position: fixed;
+    bottom: 20px;
+    left: 5vw;
+}
+
+/* Specific styles for the volume bar */
+.volume-bar {
+    width: 150px;
+    position: fixed;
+    bottom: 20px;
+    right: 20vw;
+}
+
+/* Thumb (slider handle) styling */
+.seek-bar::-webkit-slider-thumb,
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling in Webkit browsers */
+    appearance: none;
+    width: 10px; /* Increase width of the thumb */
+    height: 40px; /* Increase height of the thumb */
+    background-color: black; /* Thumb color */
+    border: 2px solid white; /* Optional: border for contrast */
+    cursor: pointer;
+    border-radius: 0; /* Hard edges for the thumb */
+}
+
+.seek-bar::-moz-range-thumb,
+.volume-bar::-moz-range-thumb {
+    width: 10px;
+    height: 40px;
+    background-color: black;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.seek-bar::-ms-thumb,
+.volume-bar::-ms-thumb {
+    width: 10px;
+    height: 40px;
+    background-color: black;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+/* Hover effect for sliders */
+.seek-bar:hover, .volume-bar:hover {
+    background-color: #ccc; /* Lighten the background when hovered */
+}
+
+.seek-bar::-webkit-slider-thumb:hover,
+.volume-bar::-webkit-slider-thumb:hover {
+    background-color: #666; /* Darken the thumb when hovered */
+}
+
+/* Specific responsive adjustment for the Seek Bar */
+@media (max-width: 1300px) {
+    .seek-bar {
+        max-width: 40vw; /* Shrink for smaller screens */
+    }
+	.volume-bar {
+		right: 40vw;
+	}
+}
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBM MAB - Produkt Info</title>
+	<link rel="stylesheet" href="css/colors.css">
+	<style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .console-button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .console-button:hover {
+      background-color: #45a049; /* Darker Green */
+    }
+	
+	#log {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 300px; /* Adjust height for better visibility */
+      overflow-y: auto; /* Enable scrolling */
+      background-color: #f9f9f9;
+      font-family: monospace; /* Use monospace font for better readability */
+    }
+    .log-entry {
+      margin: 5px 0;
+      padding: 5px;
+      border-left: 4px solid #4CAF50; /* Green left border for log entries */
+    }
+    .timestamp {
+      color: gray; /* Timestamp color */
+      font-size: 0.8em; /* Smaller font size for timestamps */
+    }
+	
+	#status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+	<script>
+	let appWindow = null;
+	
+    function sendCommand(command) {
+      window.opener.postMessage(command, '*');
+    }
+	
+	// Monitor connection status between control panel and app
+    let isConnected = false;
+    function updateStatus(connected) {
+      const statusElement = document.getElementById('status');
+      if (connected) {
+        statusElement.textContent = 'Connected to App ✅';
+        statusElement.style.color = 'green';
+      } else {
+        statusElement.textContent = 'Disconnected ❌';
+        statusElement.style.color = 'red';
+      }
+    }
+	
+	function openApp() {
+            // Only open the app if it is not connected
+            if (isConnected) {
+                logToConsole('App is already connected.'); // Log message
+                return; // Exit the function if the app is connected
+            }
+
+            // Open the app
+            appWindow = window.open('index.html', 'AppWindow');
+            logToConsole('App has been opened.'); // Log message
+        }
+
+    // Periodically ping the app to maintain the connection
+    setInterval(() => {
+      try {
+        sendCommand('ping');
+        isConnected = true;
+        updateStatus(true); // Update status as connected
+      } catch (error) {
+        isConnected = false;
+        updateStatus(false); // Update status as disconnected
+      }
+    }, 3000); // Ping every 3 seconds
+
+	let lastMessage = '';  // Store the last logged message
+	let messageCount = 1;  // Store the count of consecutive duplicate messages
+
+// Load logs from session storage on page load
+function loadLogs() {
+    const logs = JSON.parse(sessionStorage.getItem('logs')) || [];
+    logs.forEach(log => logToConsole(log, true)); // Pass 'true' for logs from storage
+}
+
+// Listen for replies from the website
+window.addEventListener('message', (event) => {
+    logToConsole(event.data); // Automatically log all replies
+});
+
+// Log messages to the console
+function logToConsole(message, isFromStorage = false) {
+    const logElement = document.getElementById('log');
+    const timestamp = new Date().toLocaleTimeString(); // Get current time
+
+    // Handle old logs: If from storage, split timestamp and message
+    let displayMessage = message;
+    let displayTimestamp = timestamp; // Default to current time if new log
+
+    if (isFromStorage && message.includes(' - ')) {
+        const splitLog = message.split(' - ');
+        displayTimestamp = splitLog[0]; // Use the old timestamp
+        displayMessage = splitLog[1];   // Use the old message
+    }
+
+    // Check for duplicate messages
+    if (displayMessage === lastMessage && !isFromStorage) {
+        messageCount++; // Increment the count
+        const lastLogEntry = logElement.lastElementChild;
+        lastLogEntry.innerHTML = `<span class="timestamp">${displayTimestamp}</span> - ${displayMessage} (x${messageCount})`;
+        return; // Exit to prevent adding a new entry
+    }
+
+    // Reset for new message
+    lastMessage = displayMessage;
+    messageCount = 1;
+
+    // Create a new log entry
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log-entry';
+    logEntry.innerHTML = `<span class="timestamp">${displayTimestamp}</span> - ${displayMessage}`;
+
+    logElement.appendChild(logEntry);
+    logElement.scrollTop = logElement.scrollHeight; // Auto-scroll to bottom
+
+    // Save new logs to session storage
+    if (!isFromStorage) {
+        const logs = JSON.parse(sessionStorage.getItem('logs')) || [];
+        logs.push(`${timestamp} - ${message}`); // Store with timestamp
+        sessionStorage.setItem('logs', JSON.stringify(logs));
+    }
+}
+	
+	function clearLogs() {
+      const logElement = document.getElementById('log');
+      logElement.innerHTML = ''; // Clear displayed logs
+      sessionStorage.removeItem('logs'); // Clear session storage logs
+	  logToConsole('All logs cleared.'); // Log message
+    }
+	
+	function closeApp() {
+      const code = prompt('Enter the code to close the app:');
+      if (code === '1234') { // Replace '1234' with your desired code
+        sendCommand('closeApp');
+      } else {
+        alert('Incorrect code. Access denied.');
+      }
+    }
+
+    // Load logs when the page is loaded
+    window.onload = loadLogs;
+  </script>
+</head>
+<body>
+        <h1>ControlPanel</h1>
+		<div id="status">Checking connection...</div>
+        <button class="console-button" onclick="sendCommand('changeBackground')">Change Background Color</button>
+		<button class="console-button" onclick="sendCommand('showAlert')">Show Alert</button>
+		<button class="console-button" onclick="closeApp()">Close App</button>
+		<button class="console-button" onclick="openApp()">Reconnect to App</button>
+       
+<h2>Console</h2>
+<button class="console-button" onclick="clearLogs()">Clear Console Log</button> <!-- Clear log button -->
+  <div id="log"></div>
+    
+</body>
+</html>

@@ -1,0 +1,314 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Tilbage-knap */
+.back-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: var(--button-background);
+    color: var(--button-text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--button-hover-background);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.open-panel-button {
+      position: fixed;
+      bottom: 20px;
+	  right: 20px;
+	  margin-right: 20px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      cursor: pointer;
+      border-radius: 50%; /* Circular button */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+    .open-panel-button:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .open-panel-button img {
+      width: 50px; /* Adjust size of the icon */
+      height: 50px; /* Adjust size of the icon */
+    }
+	
+.reload-button {
+      position: fixed;
+      bottom: 20px;
+	  right: 90px;
+      margin-right: 20px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      cursor: pointer;
+      border-radius: 50%; /* Circular button */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+    .reload-button:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .reload-button img {
+      width: 50px; /* Adjust size of the icon */
+      height: 50px; /* Adjust size of the icon */
+    }
+	
+.home-button {
+      position: fixed;
+      bottom: 20px;
+      right: 160px;
+	  margin-right: 20px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      cursor: pointer;
+      border-radius: 50%; /* Circular button */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+    .home-button:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .home-button img {
+      width: 50px; /* Adjust size of the icon */
+      height: 50px; /* Adjust size of the icon */
+    }
+	
+.play-button {
+      position: fixed;
+      bottom: 20px;
+	  right: 230px;
+      margin-right: 20px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      cursor: pointer;
+      border-radius: 50%; /* Circular button */
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+	  z-index: 1;
+    }
+    .play-button:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .play-button img {
+      width: 50px; /* Adjust size of the icon */
+      height: 50px; /* Adjust size of the icon */
+    }
+	
+.mute-button {
+      position: fixed;
+      bottom: 20px;
+	  right: 300px;
+      margin-right: 20px;
+      background-color: transparent; /* Transparent background */
+      border: none;
+      cursor: pointer;
+      border-radius: 50%; /* Circular button */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+	  z-index: 1;
+    }
+    .mute-button:hover {
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .mute-button img {
+      width: 50px; /* Adjust size of the icon */
+      height: 50px; /* Adjust size of the icon */
+    }
+	
+/* Click effect */
+.back-button:active, 
+.open-panel-button:active, 
+.reload-button:active, 
+.mute-button:active, 
+.play-button:active, 
+.home-button:active {
+    transform: scale(0.95); /* Shrink slightly on click */
+}
+
+.back-button.clicked,
+.open-panel-button.clicked,
+.reload-button.clicked,
+.mute-button.clicked, 
+.play-button.clicked, 
+.home-button.clicked {
+    animation: clickEffect 0.2s ease;
+}
+
+/* Define keyframes for the click animation */
+@keyframes clickEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* Control Panel Modal Styles */
+.control-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999; /* Ensure it's on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.control-modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.control-close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.control-close-btn:hover,
+.control-close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.control-modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.control-modal-content button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.control-modal-content button:hover {
+    background-color: #45a049;
+}
+
+.control-modal-content h2 {
+    margin-top: 0;
+}
+
+/* Success message styling */
+#saveMessage {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Heading Styles */
+
+.control-modal-content h2, h3 {
+    font-size: 1.5rem;
+	font-family: Arial, sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+
+.control-modal-content h3 {
+    font-size: 1.25rem;
+	font-family: Arial, sans-serif;
+}
+
+/* Paragraphs */
+
+.control-modal-content p {
+    font-size: 1rem;
+	font-family: Arial, sans-serif;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.control-modal-content label {
+	font-family: Arial, sans-serif;
+	color: var(--text-primary);
+}
+
+
+/* Virtual Keyboard */
+/* Virtual Keyboard Layout */
+.virtual-keyboard {
+  display: none; /* Initially hidden */
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f4f4f4;
+  padding: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+/* Key styling */
+.row {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.key {
+  padding: 15px;
+  margin: 5px;
+  font-size: 1.2rem;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.key:hover {
+  background-color: #bbb;
+}
+
+input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

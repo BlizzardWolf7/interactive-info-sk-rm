@@ -1,0 +1,528 @@
+/* produkter.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.header {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--neutral-white);
+    padding: 20px;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute; /* Position in the top-right corner */
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #e63946; /* Soft red color */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #d62828; /* Darker red on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.close-button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Click Animation */
+.close-button.clicked {
+    animation: clickEffectClose 0.2s ease;
+}
+
+/* Define keyframes for the click animation */
+@keyframes clickEffectClose {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Product Details Modal */
+#product-details {
+    position: fixed; /* Fixed positioning to overlay other content */
+    top: 0; /* Align to top of the screen */
+    left: 0; /* Align to left of the screen */
+    transform: scale(0); /* Start with 0 scale for animation */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: white; /* Background color for modal */
+    padding: 20px; /* Padding for inner content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Ensure it sits above other elements */
+    overflow: auto; /* Enable scrolling if content exceeds the modal's height */
+    opacity: 0; /* Start with opacity 0 for animation */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition for opening */
+}
+
+/* Animation for opening the modal (scale up and fade in) */
+#product-details.open {
+    transform: scale(1); /* Scale to 100% */
+    opacity: 1; /* Fade in to full opacity */
+}
+
+/* Optional: Overlay background effect */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999; /* Just below the modal */
+}
+
+/* For responsive images inside the modal */
+#product-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Optional: Close button styles */
+#product-details .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Make sure the content is readable when the modal is too tall */
+#product-details .content {
+    max-height: calc(80vh - 40px); /* Adjust content area height */
+    overflow-y: auto; /* Allow scrolling for long content */
+}
+
+
+
+
+
+/* Product Gallery (5 items per row) */
+.product-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Display 5 items per row */
+    gap: 20px; /* Space between items */
+    padding: 20px; /* Padding around the gallery */
+    justify-items: center; /* Center items in the grid */
+    width: 100%;
+}
+
+/* Product Item Styles */
+.product-item {
+    width: 250px; /* Adjust the size of the items */
+    text-align: center;
+}
+
+/* Product Image */
+.product-item img {
+  width: 200px; /* Ensartet bredde */
+  height: 200px; /* Ensartet højde */
+  object-fit: cover; /* Bevarer proportionerne og beskærer billedet */
+  border-radius: 8px; /* Valgfri afrunding af hjørner */
+  display: block; /* Sikrer, at billeder opfører sig korrekt i layoutet */
+  margin: auto; /* Centrerer billedet i dets container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
+}
+
+.product-item img:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Product Title */
+.product-item p {
+    font-size: 1.2rem; /* Slightly larger font size */
+    margin-top: 10px; /* Space between image and title */
+    color: #333; /* Darker text color */
+    font-weight: bold;
+}
+
+/* Adjust grid on smaller screens */
+@media (max-width: 1300px) {
+	.product-gallery {
+	  display: grid;
+	  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+	  gap: 20px; /* Add some space between items */
+	  padding: 10px; /* Optional: Add padding around the gallery */
+	}
+
+  .product-item {
+    width: 100%; /* Make product item fill the available space on small screens */
+  }
+  
+  .product-details {
+    font-size: 1rem; /* Smaller font */
+    width: 100%; /* Take up full width */
+	height: 100%; /* Take up full Height */
+    padding: 10px; /* Add some padding */
+    word-wrap: break-word; /* Prevent text overflow */
+  }
+  
+  #product-details img {
+    max-width: 100%;
+    max-height: 350px;
+	}
+
+}
+
+
+@media (max-width: 1024px) {
+  .product-gallery {
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .product-gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-gallery {
+    grid-template-columns: 1fr; /* 1 item per row */
+  }
+}
+
+/* Image Gallery */
+.image-gallery {
+    text-align: center;
+}
+
+#main-image {
+  width: 400px; /* Fast bredde */
+  height: 400px; /* Fast højde */
+  object-fit: cover; /* Bevarer proportionerne og beskærer billedet */
+  border-radius: 8px; /* Valgfri afrunding af hjørner */
+  display: block; /* For bedre kontrol i layoutet */
+  margin: auto; /* Centrer billedet */
+  cursor: pointer;
+  transition: transform 0.2s ease; /* Add a hover effect */
+}
+
+#main-image:hover {
+  transform: scale(1.05);
+}
+
+/* Image Modal background */
+.image-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000; /* Above other elements */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Black with transparency */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+}
+
+/* Image Modal content */
+.image-modal-content {
+  max-width: 80%;
+  max-height: 80%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease; /* Smooth zoom effect */
+  object-fit: contain; /* Ensure the image maintains its aspect ratio while fitting in the container */
+}
+
+/* Animation for zoom effect */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Arrows for navigation */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  z-index: 1001; /* Ensure arrows are on top of everything else */
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+
+
+/* Thumbnail container and styling */
+#thumbnail-container-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#thumbnail-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    max-width: 100%; /* Ensures thumbnails don’t overflow container */
+    padding-bottom: 10px; /* Space for custom scrollbar */
+    scrollbar-width: thin; /* Firefox scrollbar */
+}
+
+/* Hide scrollbar on WebKit browsers */
+#thumbnail-container::-webkit-scrollbar {
+    height: 20px;
+}
+
+#thumbnail-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
+    border-radius: 8px;
+}
+
+#thumbnail-container::-webkit-scrollbar-track {
+    background: transparent; /* Track color */
+}
+
+#thumbnail-container img {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+#thumbnail-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Product Info */
+.product-info {
+    flex: 1;
+    max-width: 50%;
+    text-align: left;
+}
+
+/* Product title and description */
+.product-info h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 1.2rem; /* Adjusted for better readability */
+    line-height: 1.6;
+    color: var(--text-secondary);
+    background-color: var(--background-light);
+    padding: 15px;
+    border-left: 5px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for text */
+}
+
+/* Variant Dropdown Container (absolute positioned next to close button) */
+#variant-container {
+    position: absolute;
+    top: 20px; /* Adjust vertical positioning */
+    right: 70px; /* Adjust horizontal position from the left */
+    width: 250px; /* Set a fixed width for the dropdown */
+}
+
+/* Styling for both dropdowns */
+.variant-dropdown-container, #specifications-container {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Variant dropdown styling */
+.variant-dropdown {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Specifications toggle styling */
+.specifications-toggle {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Specifications table styling */
+.specifications-table {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 9999;
+    display: none; /* Hide by default */
+}
+
+.specifications-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.specifications-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Category Button Styles */
+.category-button {
+  display: flex;
+  flex-direction: column; /* Stacks image and label vertically */
+  align-items: center; /* Centers content within the button */
+  width: 200px; /* Button width */
+  text-align: center;
+  margin: 20px; /* Margin for spacing between buttons */
+  cursor: pointer;
+}
+
+.category-button img {
+  width: 100%; /* Fills the button's width */
+  height: 250px; /* Height for a consistent size */
+  border-radius: 12px; /* Smooth corners */
+  object-fit: cover; /* Maintains aspect ratio of the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
+}
+
+.category-button img:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.category-button p {
+  margin-top: 10px; /* Space between the image and text */
+  font-size: 1.4em; /* Larger font size */
+  font-weight: bold;
+  color: #333; /* Neutral text color */
+  text-transform: capitalize; /* Capitalizes first letter of each word */
+}
+
+/* Category Dropdown */
+.category-dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Full screen width */
+  position: absolute;
+  top: 78px;
+  background-color: white;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.category-dropdown .category-select {
+  flex-grow: 1;
+  font-size: 1.5em;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.category-dropdown button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+/* Center the Category Buttons Horizontally */
+#product-container {
+  display: flex;
+  justify-content: center; /* Horizontally centers the buttons */
+  align-items: center; /* Vertically aligns buttons if necessary */
+  flex-wrap: wrap; /* Allows buttons to wrap to the next line if there's not enough horizontal space */
+  min-height: 100vh; /* Ensures the container takes full viewport height */
+  padding: 20px; /* Adds spacing around the container */
+  box-sizing: border-box; /* Ensures padding doesn't affect overall size */
+}

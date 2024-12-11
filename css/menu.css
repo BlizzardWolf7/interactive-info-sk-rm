@@ -1,0 +1,88 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between menu items */
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    background-color: var(--neutral-white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 200px;
+    cursor: pointer; /* Optional: show pointer cursor for interactivity */
+}
+
+/* Hover effect */
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Click effect */
+.menu-item:active {
+    transform: scale(0.95); /* Slightly shrink to show it's pressed */
+}
+
+/* Animation class for click feedback */
+.menu-item.clicked {
+    animation: clickPop 0.3s ease;
+}
+
+/* Define keyframes for the click animation */
+@keyframes clickPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.menu-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.menu-item span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.menu-logo {
+	max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 15px;
+}

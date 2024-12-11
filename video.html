@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBMMAB - Præsentationsvideo</title>
+	<link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/video.css">
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <div class="video-container">
+            <video id="presentation-video" width="100%">
+                <source src="videos/mbmmab-presentation.mp4" type="video/mp4">
+                Din browser understøtter ikke videoafspilning.
+            </video>
+	</div>		
+			<button id="play-pause" class="play-button"><img id="play-pause-icon" src="img/menu/play.png"></button>
+			<input type="range" id="seek-bar" value="0" class="seek-bar">
+			<button id="mute" class="mute-button"><img id="mute-icon" src="img/menu/sound.png"></button>
+			<!-- <input type="range" id="volume-bar" class="volume-bar" min="0" max="1" step="0.1" value="1"> -->
+		
+	<div class="controls-bar"></div>
+    <script src="js/video.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
